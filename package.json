@@ -21,7 +21,8 @@
     "openai": "^3.2.1",
     "@webdeveducation/next-verify-stripe": "^1.0.1",
     "micro-cors": "^0.1.1",
-    "mongodb": "^4.13.0"
+    "mongodb": "^4.13.0",
+    "@auth0/nextjs-auth0": "^2.6.0"
   },
   "devDependencies": {
     "autoprefixer": "10.4.14",
