@@ -12,8 +12,7 @@ module.exports = {
         heading: ''
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+        'default-gradient': 'linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)'
       }
     }
   },

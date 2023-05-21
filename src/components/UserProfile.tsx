@@ -15,13 +15,13 @@ export default function UserProfile() {
   return !!user ? (
     <div className="flex gap-2 items-center pb-3">
       <div className="main-w-[50px]">
-        <Image className="rounded-full" width={60} height={60} src={userPicture} alt={userName!} />
+        <Image className="rounded-full" width={200} height={200} src={userPicture} alt={userName!} />
       </div>
 
       <div>
         <div className="flex fap-1 justify-between">
           <h2>{userName}</h2>
-          <Link href="api/auth/logout">logout</Link>
+          <Link href="/api/auth/logout">logout</Link>
         </div>
 
         <p>{userEmail}</p>

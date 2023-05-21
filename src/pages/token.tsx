@@ -2,7 +2,7 @@ import { NextPageWithLayout } from '@/core/types'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { ReactElement } from 'react'
 
-import AppLayout from '@/components/app_layout/app_layout'
+import AppLayout from '@/components/AppLayout'
 
 const TokenPage: NextPageWithLayout = () => {
   return <h1>TokenPage works!</h1>
