@@ -5,7 +5,24 @@ import { ReactElement } from 'react'
 import AppLayout from '@/components/AppLayout'
 
 const TokenPage: NextPageWithLayout = () => {
-  return <h1>TokenPage works!</h1>
+  async function handleBuyTokens() {
+    //TODO: create a custom hook to handle these requests
+    const response = await fetch('/api/buy_token', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
+
+  return (
+    <div>
+      <h1>TokenPage works!</h1>
+      <button className="btn" onClick={handleBuyTokens}>
+        Buy tokens
+      </button>
+    </div>
+  )
 }
 
 TokenPage.getLayout = function (page: ReactElement) {
@@ -18,4 +35,4 @@ TokenPage.getLayout = function (page: ReactElement) {
 
 export const getServerSideProps = withPageAuthRequired({})
 
-export default TokenPage;
+export default TokenPage

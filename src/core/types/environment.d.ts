@@ -1,3 +1,5 @@
+import { MongoClient } from "mongodb"
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -10,6 +12,9 @@ declare global {
       OPEN_AI_KEY: string
     }
   }
+
+  var _mongoClientPromise: Promise<MongoClient>
+
 }
 
 export { }
