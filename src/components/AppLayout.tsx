@@ -1,14 +1,27 @@
 import UserProfile from '@/components/UserProfile'
 import Link from 'next/link'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useContext, useEffect } from 'react'
 import { DollarSign } from 'react-feather'
 
 import { AppProps } from '@/core/models'
+import PostsContext from '@/state/posts_context'
 import Button from './Button'
 
 type AppLayoutProps = PropsWithChildren<AppProps>
 
-export const AppLayout = ({ children, availableTokens, posts, postId }: AppLayoutProps) => {
+export const AppLayout = ({
+  children,
+  availableTokens,
+  posts: postFromSSR,
+  postId
+}: AppLayoutProps) => {
+  const { posts, setPostFromSSR } = useContext(PostsContext)
+
+  useEffect(() => {
+    // save received posts on context state
+    setPostFromSSR(postFromSSR)
+  }, [postFromSSR, setPostFromSSR])
+
   function getAvailableTokensLabel() {
     if (availableTokens <= 1) return `${availableTokens?.toString()} token`
     return `${availableTokens?.toString()} tokens`
@@ -40,6 +53,10 @@ export const AppLayout = ({ children, availableTokens, posts, postId }: AppLayou
               {topic}
             </Link>
           ))}
+
+          <span className='hover:underline text-sm text-slate-400 text-center mt-5 cursor-pointer'>
+            load more posts
+          </span>
         </div>
 
         <UserProfile />

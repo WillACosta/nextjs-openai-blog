@@ -5,6 +5,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 
+import { PostsProvider } from '@/state/posts_context'
 import '../styles/globals.css'
 
 type AppPropsWithLayout = AppProps & {
@@ -22,9 +23,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <UserProvider>
-      <main className={`${interFontSettings.variable} font-body`}>
-        {getLayout(<Component {...pageProps} />, pageProps)}
-      </main>
+      <PostsProvider {...pageProps}>
+        <main className={`${interFontSettings.variable} font-body`}>
+          {getLayout(<Component {...pageProps} />, pageProps)}
+        </main>
+      </PostsProvider>
     </UserProvider>
   )
 }

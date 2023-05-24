@@ -7,35 +7,44 @@ import { getAppProps } from '@/core/utils'
 import { useGeneratePost } from '@/hooks'
 
 const NewPostPage = () => {
-  const { handleGeneratePost, keywords, topic, setKeywords, setTopic } = useGeneratePost()
+  const { handleGeneratePost, keywords, topic, setKeywords, setTopic, isGenerating } =
+    useGeneratePost()
 
   return (
     <div className='p-5'>
-      <form onSubmit={handleGeneratePost}>
-        <div>
-          <label>Topic</label>
-          <input
-            className='resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-lg'
-            type='text'
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-          />
-        </div>
+      {isGenerating && (
+        <>
+          <div className='mx-auto flex h-full animate-pulse text-green-500 flex-col justify-center items-center'>generating...</div>
+        </>
+      )}
 
-        <div>
-          <label>Keywords (separated by comma)</label>
-          <input
-            className='resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-lg'
-            type='text'
-            value={keywords}
-            onChange={(e) => setKeywords(e.target.value)}
-          />
-        </div>
+      {!isGenerating && (
+        <form onSubmit={handleGeneratePost}>
+          <div>
+            <label>Topic</label>
+            <input
+              className='resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-lg'
+              type='text'
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+            />
+          </div>
 
-        <button className='btn' type='submit'>
-          Generate
-        </button>
-      </form>
+          <div>
+            <label>Keywords (separated by comma)</label>
+            <input
+              className='resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-lg'
+              type='text'
+              value={keywords}
+              onChange={(e) => setKeywords(e.target.value)}
+            />
+          </div>
+
+          <button className='btn' type='submit'>
+            Generate
+          </button>
+        </form>
+      )}
     </div>
   )
 }

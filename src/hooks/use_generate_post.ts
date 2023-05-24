@@ -6,9 +6,11 @@ export function useGeneratePost() {
   const router = useRouter()
   const [keywords, setKeywords] = useState('tree, talking trees, science')
   const [topic, setTopic] = useState('Generate a blog post about talking trees')
+  const [isGenerating, setIsGenerating] = useState(false)
 
   async function handleGeneratePost(event: SyntheticEvent) {
     event.preventDefault()
+    setIsGenerating(true)
 
     const response = await fetch('/api/generate_post', {
       method: 'POST',
@@ -22,6 +24,7 @@ export function useGeneratePost() {
 
     // navigate to post detail
     if (json?.postId) {
+      setIsGenerating(false)
       router.push(`/post/${json.postId}`)
     }
   }
@@ -31,6 +34,8 @@ export function useGeneratePost() {
     topic,
     setKeywords,
     setTopic,
-    handleGeneratePost
+    handleGeneratePost,
+    isGenerating,
+    setIsGenerating
   }
 }
