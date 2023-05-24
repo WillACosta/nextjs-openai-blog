@@ -8,20 +8,26 @@ export default function UserProfile() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
+  function getUserName() {
+    const userName = user?.name
+    if (userName?.includes('@')) return ''
+    return userName || ''
+  }
+
+  const userName = getUserName();
   const userPicture = user?.picture || '';
-  const userName = user?.name;
   const userEmail = user?.email;
 
   return !!user ? (
     <div className="flex gap-2 items-center pb-3">
       <div className="main-w-[50px]">
-        <Image className="rounded-full" width={200} height={200} src={userPicture} alt={userName!} />
+        <Image className="rounded-full" width={200} height={200} src={userPicture} alt={userName} />
       </div>
 
       <div>
         <div className="flex fap-1 justify-between">
-          <h2>{userName}</h2>
-          <Link href="/api/auth/logout">logout</Link>
+          {userName?.length > 0 && <h2>{userName}</h2>}
+          <Link href="/api/auth/logout" className="underline">logout</Link>
         </div>
 
         <p>{userEmail}</p>

@@ -4,6 +4,7 @@
   "tabWidth": 2,
   "singleQuote": true,
   "trailingComma": "none",
+  "jsxSingleQuote": true,
   "jsxBracketSameLine": false,
   "parser": "babel",
   "semi": false,

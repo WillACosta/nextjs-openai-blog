@@ -1,1 +1,1 @@
-export * from './use_auth_guard';
+export * from './use_generate_post';

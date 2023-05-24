@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: 'var(--inter-font-family)',
-        heading: ''
+        heading: 'var(--inter-font-family)'
       },
       backgroundImage: {
         'default-gradient': 'linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%)'

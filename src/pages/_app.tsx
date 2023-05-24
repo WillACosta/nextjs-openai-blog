@@ -1,4 +1,4 @@
-import { NextPageWithLayout } from '@/core/types'
+import { AppPageWithLayout } from '@/core/types'
 import '@/styles/globals.css'
 
 import { UserProvider } from '@auth0/nextjs-auth0/client'
@@ -8,11 +8,11 @@ import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
+  Component: AppPageWithLayout
 }
 
 const interFontSettings = Inter({
-  weight: ['300', '400', '600'],
+  weight: ['300', '400', '600', '700'],
   subsets: ['latin'],
   variable: '--inter-font-family'
 })
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <UserProvider>
       <main className={`${interFontSettings.variable} font-body`}>
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(<Component {...pageProps} />, pageProps)}
       </main>
     </UserProvider>
   )
