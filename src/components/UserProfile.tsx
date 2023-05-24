@@ -26,7 +26,7 @@ export default function UserProfile() {
 
       <div>
         <div className="flex fap-1 justify-between">
-          {userName?.length > 0 && <h2>{userName}</h2>}
+          {userName?.length > 0 && <strong>{userName}</strong>}
           <Link href="/api/auth/logout" className="underline">logout</Link>
         </div>
 

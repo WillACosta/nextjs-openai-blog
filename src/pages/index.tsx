@@ -7,7 +7,7 @@ export default function Home() {
       <UserProvider>
         <div className="p-5 rounded-lg bg-white max-w-[400px] flex flex-col gap-2">
           <p>
-            Welcome to your AI-powered SASS solution to generate SEO-optimized blog posts in
+            Welcome to your AI-powered SaaS solution to generate SEO-optimized blog posts in
             minutes. Get high-quality content, without sacrificing your precious time.
           </p>
 

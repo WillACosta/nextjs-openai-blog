@@ -1,38 +1,60 @@
-import { getSession } from '@auth0/nextjs-auth0'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from '@auth0/nextjs-auth0';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-import clientPromise from '../../../lib/mongodb'
+import Stripe from 'stripe';
 
-interface Data {}
+const stripeAPI = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2022-11-15'
+})
 
-export default async function buyToken(req: NextApiRequest, res: NextApiResponse<Data>) {
+export interface BuyTokenResponse {
+  data?: {
+    session: Stripe.Response<Stripe.Checkout.Session>;
+  },
+  statusCode?: number
+  message?: string
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<BuyTokenResponse>) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST')
+    return res.status(405).end('Method Not Allowed')
+  }
+
   try {
     const session = await getSession(req, res)
     const userId = session?.user['sub']
 
-    // TODO: move logic to another place
-    const mongoDBClient = await clientPromise
-    const db = mongoDBClient.db('BlogStandard')
+    const protocol = process.env.NODE_ENV === 'development' ? 'http://' : 'https://'
+    const host = req.headers.host
 
-    const userProfile = await db.collection('users').updateOne(
-      {
-        auth0Id: userId
-      },
-      {
-        $inc: {
-          availableTokens: 10
-        },
-        $setOnInsert: {
-          auth0Id: userId
+    const params = {
+      submit_type: 'pay',
+      mode: 'payment',
+      payment_method_types: ['card', 'boleto'],
+      line_items: [
+        {
+          price: process.env.STRIPE_PRODUCT_PRICE_ID,
+          quantity: 1
+        }
+      ],
+      success_url: `${protocol}${host}/success`,
+      cancel_url: `${req.headers.origin}/donate-with-checkout`,
+      payment_intent_data: {
+        metadata: {
+          userId: userId
         }
       },
-      {
-        upsert: true
+      metadata: {
+        userId: userId
       }
-    )
+    } as Stripe.Checkout.SessionCreateParams
 
-    res.status(200).json({})
-  } catch (error) {
-    console.log('error ->', error)
+    const checkoutSession = await stripeAPI.checkout.sessions.create(params)
+    res.status(200).json({ data: { session: checkoutSession } })
+
+  } catch (err) {
+    const errorMessage = err instanceof Error ? err.message : 'Internal server error'
+    res.status(500).json({ statusCode: 500, message: errorMessage })
   }
 }

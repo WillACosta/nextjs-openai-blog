@@ -4,6 +4,7 @@ import { ReactElement } from 'react'
 import { AppLayout } from '@/components'
 import { getAppProps } from '@/core/utils'
 import { AppProps } from '../core/models'
+import { BuyTokenResponse } from './api/buy_token'
 
 const TokenPage = () => {
   async function handleBuyTokens() {
@@ -14,6 +15,9 @@ const TokenPage = () => {
         'content-type': 'application/json'
       }
     })
+
+    const json = await response.json() as BuyTokenResponse
+    window.location.href = json.data?.session.url || ''
   }
 
   return (

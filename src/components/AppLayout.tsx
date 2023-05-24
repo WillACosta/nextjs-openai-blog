@@ -8,7 +8,7 @@ import Button from './Button'
 
 type AppLayoutProps = PropsWithChildren<AppProps>
 
-export const AppLayout = ({children, availableTokens, posts}: AppLayoutProps) => {
+export const AppLayout = ({ children, availableTokens, posts, postId }: AppLayoutProps) => {
   function getAvailableTokensLabel() {
     if (availableTokens <= 1) return `${availableTokens?.toString()} token`
     return `${availableTokens?.toString()} tokens`
@@ -29,9 +29,11 @@ export const AppLayout = ({children, availableTokens, posts}: AppLayoutProps) =>
         </div>
 
         <div className='flex-1 overflow-auto mt-10'>
-          {posts?.map(({ _id, postId, topic }) => (
+          {posts?.map(({ _id, topic }) => (
             <Link
-              className='block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded'
+              className={`border border-white/0 block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded ${
+                postId === _id ? '' : 'bg-white/20 border-white'
+              }`}
               key={_id}
               href={`/post/${_id}`}
             >

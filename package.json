@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
+    "bootstrap": "yarn",
+    "clear": "rm -rf node_modules/"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.6.0",
+    "@stripe/stripe-js": "^1.53.0",
     "@types/node": "20.1.7",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -23,9 +27,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
-    "typescript": "5.0.4"
+    "stripe": "^12.6.0",
+    "typescript": "5.0.4",
+    "micro": "^10.0.1"
   },
   "devDependencies": {
+    "@types/micro": "^10.0.0",
+    "@types/micro-cors": "^0.1.2",
     "autoprefixer": "10.4.14",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
