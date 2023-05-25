@@ -15,7 +15,7 @@ export const AppLayout = ({
   posts: postFromSSR,
   postId
 }: AppLayoutProps) => {
-  const { posts, setPostFromSSR } = useContext(PostsContext)
+  const { noMorePosts, posts, setPostFromSSR, loadMorePosts } = useContext(PostsContext)
 
   useEffect(() => {
     // save received posts on context state
@@ -25,6 +25,11 @@ export const AppLayout = ({
   function getAvailableTokensLabel() {
     if (availableTokens <= 1) return `${availableTokens?.toString()} token`
     return `${availableTokens?.toString()} tokens`
+  }
+
+  function handleLoadMorePosts() {
+    const lastPostDate = posts[posts.length - 1].created
+    loadMorePosts({ lastPostDate })
   }
 
   return (
@@ -54,9 +59,14 @@ export const AppLayout = ({
             </Link>
           ))}
 
-          <span className='hover:underline text-sm text-slate-400 text-center mt-5 cursor-pointer'>
-            load more posts
-          </span>
+          {!noMorePosts && (
+            <span
+              className='hover:underline text-sm text-slate-400 text-center mt-5 cursor-pointer'
+              onClick={handleLoadMorePosts}
+            >
+              load more posts
+            </span>
+          )}
         </div>
 
         <UserProfile />

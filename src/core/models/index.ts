@@ -1,4 +1,4 @@
-import { Document } from "mongodb"
+import { Document, ObjectId } from "mongodb"
 
 export type Post = {
   _id: string
@@ -7,7 +7,7 @@ export type Post = {
   title: string
   topic: string
   metaDescription: string
-  userId: string
+  userId: ObjectId
   keywords: string,
 } & AppProps
 
