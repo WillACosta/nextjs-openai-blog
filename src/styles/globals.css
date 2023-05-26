@@ -9,7 +9,7 @@
   h4,
   h5,
   h6 {
-    @apply font-heading my-6 font-bold;
+    @apply font-heading mb-1 font-bold;
   }
 
   h1 {
@@ -55,6 +55,6 @@
 
 @layer components {
   .btn {
-    @apply bg-green-400 tracking-wider w-full text-white font-bold cursor-pointer uppercase px-4 py-2 rounded-md hover:bg-green-900 transition-colors text-center mt-10;
+    @apply bg-primary w-full text-white cursor-pointer px-4 py-3 rounded-full hover:bg-primary/80 transition-colors text-center mt-10;
   }
 }
