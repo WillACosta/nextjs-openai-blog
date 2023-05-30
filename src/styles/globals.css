@@ -32,8 +32,9 @@
     @apply text-lg;
   }
 
-  ul, ol {
-    @apply my-4
+  ul,
+  ol {
+    @apply my-4;
   }
 
   ul {
@@ -45,16 +46,49 @@
   }
 
   li {
-    @apply my-2
+    @apply my-2;
   }
 
   p {
-    @apply my-2
+    @apply my-2;
   }
 }
 
 @layer components {
   .btn {
-    @apply bg-primary w-full text-white cursor-pointer px-4 py-3 rounded-full hover:bg-primary/80 transition-colors text-center mt-10;
+    @apply bg-primary text-white cursor-pointer rounded-full hover:bg-primary/80 transition-colors flex flex-col items-center justify-center w-full px-5 py-2;
+  }
+}
+
+@layer utilities {
+  @variants responsive {
+    .masonry {
+      column-gap: 1.5em;
+      column-count: 1;
+    }
+
+    .masonry-sm {
+      column-gap: 1.5em;
+      column-count: 2;
+    }
+
+    .masonry-md {
+      column-gap: 1.5em;
+      column-count: 3;
+    }
+
+    .masonry-lg {
+      column-gap: 1.5em;
+      column-count: 4;
+    }
+
+    .masonry-xl {
+      column-gap: 1.5em;
+      column-count: 4;
+    }
+
+    .break-inside {
+      break-inside: avoid;
+    }
   }
 }
