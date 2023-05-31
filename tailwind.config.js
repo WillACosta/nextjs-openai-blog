@@ -24,7 +24,9 @@ module.exports = {
       }
     }
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-radix")(),
+  ],
   // we need to inform tailwind compiler all classes will be available on app, even dynamic classes
   safelist: [
     ...colorsGrade.map((color) => `bg-purple-${color}`),

@@ -2,9 +2,10 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { ReactElement } from 'react'
 
 import { AppLayout } from '@/components'
+import { AppProps } from '@/core/models'
 import { getAppProps } from '@/core/utils'
-import { AppProps } from '../core/models'
-import { BuyTokenResponse } from './api/buy_token'
+
+import { BuyTokenResponse } from '../api/buy_token'
 
 const TokenPage = () => {
   async function handleBuyTokens() {

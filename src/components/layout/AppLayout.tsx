@@ -1,14 +1,14 @@
 import { PropsWithChildren } from 'react'
 
 import { AppProps } from '@/core/models'
-import AppHeader from './AppHeader'
+import { AppHeader } from './AppHeader'
 
 type AppLayoutProps = PropsWithChildren<AppProps>
 
-export const AppLayout = ({ children }: AppLayoutProps) => {
+export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
-     <AppHeader />
+      <AppHeader />
       {children}
     </>
   )

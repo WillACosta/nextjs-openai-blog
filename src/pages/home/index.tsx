@@ -1,11 +1,11 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
-import { AppLayout } from '@/components'
 import { AppProps } from '@/core/models'
 import { getAppProps } from '@/core/utils'
 import { ReactElement } from 'react'
 
-import IconButton from '@/components/IconButton'
+import IconButton from '@/components/atoms/IconButton'
+import AppLayout from '@/components/layout/AppLayout'
 
 import { Search } from 'react-feather'
 
