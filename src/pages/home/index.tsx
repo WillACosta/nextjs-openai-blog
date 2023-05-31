@@ -19,7 +19,7 @@ function getRandomColorGrade() {
 const Home = ({ posts: postFromSSR, availableTokens }: AppProps) => {
   return (
     <>
-      <div className='grid grid-rows-[300px_1fr] h-screen w-screen p-12'>
+      <div className='grid grid-rows-[300px_1fr] h-screen w-screen px-5 md:p-12'>
         <div className='flex flex-col items-center justify-end mb-10'>
           <strong className='text-center text-lg'>make something great</strong>
 
@@ -27,7 +27,7 @@ const Home = ({ posts: postFromSSR, availableTokens }: AppProps) => {
             <form className='flex gap-3 mt-5'>
               <input
                 type='text'
-                className='w-[700px] rounded-lg p-4 bg-zinc-100 flex-grow-[2]'
+                className='w-[300px] md:w-[500px] lg:w-[700px] rounded-lg p-4 bg-zinc-100 flex-grow-[2]'
                 placeholder='search your articles here'
               />
 
