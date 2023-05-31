@@ -5,7 +5,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 
-import { PostsProvider } from '@/state/posts_context'
+import { PostsProvider } from '@/pages/post/state/posts_context'
 import '../styles/globals.css'
 
 type AppPropsWithLayout = AppProps & {

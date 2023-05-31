@@ -7,6 +7,7 @@ import { ReactElement } from 'react'
 import IconButton from '@/components/atoms/IconButton'
 import AppLayout from '@/components/layout/AppLayout'
 
+import PurchaseCreditsView from '@/features/purchase-credits/views'
 import { Search } from 'react-feather'
 
 function getRandomColorGrade() {
@@ -34,10 +35,7 @@ const Home = ({ posts: postFromSSR, availableTokens }: AppProps) => {
               <IconButton icon={<Search />} className='w-[auto]' />
             </form>
 
-            <div className='flex gap-3 mt-1 text-muted'>
-              <p>you have: {availableTokens} credits</p>
-              <button className='underline'>buy more</button>
-            </div>
+            <PurchaseCreditsView />
           </div>
         </div>
 

@@ -1,10 +1,10 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { ReactElement } from 'react'
 
-import { AppLayout } from '@/components'
+import AppLayout from '@/components/layout/AppLayout'
+import { useGeneratePost } from '@/core/hooks'
 import { AppProps } from '@/core/models'
 import { getAppProps } from '@/core/utils'
-import { useGeneratePost } from '@/hooks'
 
 const NewPostPage = () => {
   const { handleGeneratePost, keywords, topic, setKeywords, setTopic, isGenerating } =

@@ -2,6 +2,7 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { Cross1Icon } from '@radix-ui/react-icons'
 
 import * as PopoverPrimitive from '@radix-ui/react-popover'
+import Link from 'next/link'
 import AvatarComponent from '../atoms/AvatarComponent'
 
 export default function UserProfile() {
@@ -40,7 +41,9 @@ export default function UserProfile() {
           className='radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down z-50 w-48 rounded-lg p-4 shadow-md md:w-56 bg-purple-100 mr-2'
         >
           <PopoverPrimitive.Arrow className='fill-purple-100' />
-          <span>logout</span>
+          <Link href='/api/auth/logout' className='hover:underline'>
+            logout
+          </Link>
 
           <PopoverPrimitive.Close
             className='absolute top-3 right-4 inline-flex items-center justify-center rounded-full p-1 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'

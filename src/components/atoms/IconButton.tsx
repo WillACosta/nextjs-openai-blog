@@ -5,9 +5,5 @@ type Props = {
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 export default function IconButton({ className, icon }: Props) {
-  return (
-    <>
-      <button className={`btn ${className}`}>{icon}</button>
-    </>
-  )
+  return <button className={`btn ${className}`}>{icon}</button>
 }
