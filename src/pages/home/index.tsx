@@ -2,70 +2,84 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 import { AppProps } from '@/core/models'
 import { getAppProps } from '@/core/utils'
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 
 import IconButton from '@/components/atoms/IconButton'
 import AppLayout from '@/components/layout/AppLayout'
 
+import useSearchPost from '@/core/hooks/use_search_post'
+import ListArticles from '@/features/list-articles'
 import PurchaseCreditsView from '@/features/purchase-credits/views'
 import { Search } from 'react-feather'
 
-function getRandomColorGrade() {
-  const colorGrade = [50, 100, 200, 300, 400, 500, 600]
-  const randomIndex = Math.floor(Math.random() * colorGrade.length)
+type HomeProps = {
+  hasPaymentWithSuccess: boolean
+} & AppProps
 
-  return colorGrade[randomIndex]
-}
+const Home = ({ posts: postFromSSR, availableTokens, hasPaymentWithSuccess }: HomeProps) => {
+  const { handleSearchArticle, filteredPosts } = useSearchPost(postFromSSR)
 
-const Home = ({ posts: postFromSSR, availableTokens }: AppProps) => {
+  useEffect(
+    function handleSuccess() {
+      if (hasPaymentWithSuccess) {
+        // handle toast and remove success_url
+        alert('Payment made with successful!')
+      }
+    },
+    [hasPaymentWithSuccess]
+  )
+
   return (
-    <>
-      <div className='grid grid-rows-[300px_1fr] h-screen w-screen px-5 md:p-12'>
-        <div className='flex flex-col items-center justify-end mb-10'>
-          <strong className='text-center text-lg'>make something great</strong>
+    <div className='grid grid-rows-[300px_1fr] h-screen w-screen px-5 md:p-12'>
+      <div className='flex flex-col items-center justify-end mb-10'>
+        <strong className='text-center text-lg'>make something great</strong>
 
-          <div>
-            <form className='flex gap-3 mt-5'>
-              <input
-                type='text'
-                className='w-[300px] md:w-[500px] lg:w-[700px] rounded-lg p-4 bg-zinc-100 flex-grow-[2]'
-                placeholder='search your articles here'
-              />
+        <div>
+          <form className='flex gap-3 mt-5'>
+            <input
+              type='text'
+              className='w-[300px] md:w-[500px] lg:w-[700px] rounded-lg p-4 bg-zinc-100 flex-grow-[2]'
+              placeholder='search your articles here'
+              onChange={handleSearchArticle}
+            />
 
-              <IconButton icon={<Search />} className='w-[auto]' />
-            </form>
+            <IconButton icon={<Search />} className='w-[auto]' />
+          </form>
 
-            <PurchaseCreditsView />
-          </div>
-        </div>
-
-        <div className='container mx-auto mt-10'>
-          <div className='masonry sm:masonry-sm md:masonry-md lg:masonry-lg xl:masonry-xl'>
-            {postFromSSR.map(({ _id, topic }) => {
-              return (
-                <div
-                  key={_id}
-                  className={`h-[100px] w-full bg-purple-${getRandomColorGrade()} mb-5 break-inside rounded-3xl flex justify-center items-center p-5 text-lg`}
-                >
-                  {topic}
-                </div>
-              )
-            })}
-          </div>
+          <PurchaseCreditsView availableTokens={availableTokens} />
         </div>
       </div>
-    </>
+
+      <div className='container mx-auto mt-10'>
+        {filteredPosts.length === 0 && (
+          <>
+            <div className='flex flex-col justify-center items-center text-muted'>
+              <p>no items found.</p>
+            </div>
+          </>
+        )}
+
+        {filteredPosts.length > 0 && <ListArticles posts={filteredPosts} />}
+      </div>
+    </div>
   )
 }
 
-Home.getLayout = function getLayout(page: ReactElement, pageProps: AppProps) {
+Home.getLayout = function getLayout(page: ReactElement, pageProps: HomeProps) {
   return <AppLayout {...pageProps}>{page}</AppLayout>
 }
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(context) {
-    const props = await getAppProps(context)
-    return { props }
+    const hasPaymentWithSuccess = context.query['payment_success']
+    const appProps = await getAppProps(context)
+
+    return {
+      props: {
+        ...appProps,
+        hasPaymentWithSuccess: Boolean(hasPaymentWithSuccess)
+      }
+    }
   }
 })
 

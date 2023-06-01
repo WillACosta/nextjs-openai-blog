@@ -4,9 +4,8 @@ import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { ObjectId } from 'mongodb'
 import { ReactElement } from 'react'
 
-import { AppLayout } from '@/components'
+import AppLayout from '@/components/layout/AppLayout'
 import { AppProps, Post } from '@/core/models'
-import { NextPageWithLayout } from '@/core/types'
 import { getAppProps } from '@/core/utils'
 import clientPromise from '../../../lib/mongodb'
 

@@ -22,4 +22,3 @@ _this project is under construction_
 - Integration with `Stripe` Checkout to buy digital currency
 - `MongoDB` to save user data
 - `TailwindCSS` and `RadixUI` for create beautifully, responsive and accessible UI
-

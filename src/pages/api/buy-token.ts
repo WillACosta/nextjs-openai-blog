@@ -38,8 +38,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           quantity: 1
         }
       ],
-      success_url: `${protocol}${host}/success`,
-      cancel_url: `${req.headers.origin}/donate-with-checkout`,
+      success_url: `${protocol}${host}/home?payment_success=true`,
+      cancel_url: `${req.headers.origin}/home`,
       payment_intent_data: {
         metadata: {
           userId: userId

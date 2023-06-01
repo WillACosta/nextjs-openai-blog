@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
-    "bootstrap": "yarn",
+    "bootstrap": "yarn stripe:listen",
     "clear": "rm -rf node_modules/"
   },
   "dependencies": {

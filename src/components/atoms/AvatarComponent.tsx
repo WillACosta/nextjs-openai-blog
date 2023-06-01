@@ -17,7 +17,7 @@ export default function AvatarComponent({ imageURL, altText, fallBackValue, ...p
         alt={altText}
       />
 
-      <AvatarPrimitive.Fallback className='flex w-full h-full items-center justify-center bg-slate-200 text-sm' delayMs={600}>
+      <AvatarPrimitive.Fallback className='flex w-full h-full items-center justify-center bg-zinc-100 text-sm' delayMs={600}>
         {fallBackValue}
       </AvatarPrimitive.Fallback>
     </AvatarPrimitive.Root>
