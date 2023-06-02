@@ -29,8 +29,10 @@ git clone https://github.com/WillACosta/nextjs-openai-blog
 yarn install & yarn bootstrap
 ```
 
-This command will instal the necessary dependencies and runs the script for
-listening to and handling stripe response (webhook)
+This command will install all the necessary dependencies and runs the script for
+listening to stripe response (webhook) and handling payments
+
+**you find more information in `package.json` file** 
 
 #
 
