@@ -4,7 +4,7 @@ This project is a showcase for consuming OpenAI APIs and use of generative AI (G
 
 ### Screenshots
 <br/>
-  <img src="docs/images/mobile_screenshot.png"/>
+  <img src="docs/images/mobile_screenshots.png"/>
 <br/>
 
 ### Technical Resources
