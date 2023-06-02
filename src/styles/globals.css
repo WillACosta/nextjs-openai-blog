@@ -17,7 +17,7 @@
   h4,
   h5,
   h6 {
-    @apply my-7
+    @apply my-7;
   }
 
   h1 {
@@ -69,11 +69,15 @@
 
 @layer components {
   .btn {
-    @apply bg-primary text-white cursor-pointer rounded-full hover:bg-primary/80 transition-colors flex flex-col items-center justify-center w-full px-5 py-2;
+    @apply bg-primary text-white cursor-pointer rounded-full hover:bg-primary/80 transition-colors flex flex-col items-center justify-center w-full px-5 py-3.5 disabled:bg-zinc-300 disabled:text-gray-500 disabled:cursor-not-allowed;
   }
 
   .link {
     @apply text-gray-700 hover:underline;
+  }
+
+  .field {
+    @apply w-[300px] md:w-[500px] lg:w-[700px] rounded-lg p-4 bg-zinc-100 flex-grow-[2];
   }
 }
 

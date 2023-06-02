@@ -12,6 +12,7 @@ import ListArticles from '@/features/list-articles'
 import PurchaseCreditsView from '@/features/purchase-credits/views'
 import { Search } from 'react-feather'
 
+import InputField from '@/components/atoms/InputField'
 import ToastComponent from '@/components/atoms/ToastComponent'
 import { ToastProps, handleShowToastNotification } from '@/core/ui'
 
@@ -20,7 +21,7 @@ type HomeProps = {
 } & AppProps
 
 const Home = ({ posts: postFromSSR, availableTokens, hasPaymentWithSuccess }: HomeProps) => {
-  const { handleSearchArticle, filteredPosts } = useSearchPost(postFromSSR)
+  const { handleSearchArticle, filteredPosts, setQueryText } = useSearchPost(postFromSSR)
 
   useEffect(
     function handleSuccess() {
@@ -42,14 +43,8 @@ const Home = ({ posts: postFromSSR, availableTokens, hasPaymentWithSuccess }: Ho
 
           <div>
             <form className='flex gap-3 mt-5'>
-              <input
-                type='text'
-                className='w-[300px] md:w-[500px] lg:w-[700px] rounded-lg p-4 bg-zinc-100 flex-grow-[2]'
-                placeholder='search your articles here'
-                onChange={handleSearchArticle}
-              />
-
-              <IconButton icon={<Search />} className='w-[auto]' />
+              <InputField onChange={handleSearchArticle} placeHolder='search your articles here'  />
+              <IconButton onClick={(e) => setQueryText(e.currentTarget.value)} icon={<Search />} className='w-[auto]' />
             </form>
 
             <PurchaseCreditsView availableTokens={availableTokens} />

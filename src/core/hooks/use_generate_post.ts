@@ -4,8 +4,9 @@ import { SyntheticEvent, useState } from 'react'
 
 export function useGeneratePost() {
   const router = useRouter()
-  const [keywords, setKeywords] = useState('tree, talking trees, science')
-  const [topic, setTopic] = useState('Generate a blog post about talking trees')
+
+  const [keywords, setKeywords] = useState<string>('')
+  const [topic, setTopic] = useState<string>('')
   const [isGenerating, setIsGenerating] = useState(false)
 
   async function handleGeneratePost(event: SyntheticEvent) {
@@ -22,7 +23,6 @@ export function useGeneratePost() {
 
     const json = await response.json() as {postId: ObjectId}
 
-    // navigate to post detail
     if (json?.postId) {
       setIsGenerating(false)
       router.push(`/post/${json.postId}`)

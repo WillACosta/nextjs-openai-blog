@@ -1,5 +1,6 @@
 import { ReactElement } from 'react'
 
+import InputField from '@/components/atoms/InputField'
 import AppLayout from '@/components/layout/AppLayout'
 import { useGeneratePost } from '@/core/hooks'
 import { AppProps } from '@/core/models'
@@ -9,41 +10,41 @@ const NewPostPage = () => {
     useGeneratePost()
 
   return (
-    <div className='p-5'>
-      {isGenerating && (
-        <>
-          <div className='mx-auto flex h-full animate-pulse text-green-500 flex-col justify-center items-center'>
-            generating...
-          </div>
-        </>
-      )}
+    <div className='container mx-auto flex flex-col gap-12 items-center mt-10'>
+      {isGenerating && <div className='animate-pulse text-purple-400'>generating...</div>}
 
       {!isGenerating && (
-        <form onSubmit={handleGeneratePost}>
-          <div>
-            <label>Topic</label>
-            <input
-              className='resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-lg'
-              type='text'
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-            />
-          </div>
+        <>
+          <p className='text-lg'>generate your blog post here, with power of generating AI.</p>
 
-          <div>
-            <label>Keywords (separated by comma)</label>
-            <input
-              className='resize-none border border-slate-500 w-full block my-2 px-4 py-2 rounded-lg'
-              type='text'
-              value={keywords}
-              onChange={(e) => setKeywords(e.target.value)}
-            />
-          </div>
+          <form onSubmit={handleGeneratePost} className='flex flex-col gap-8 w-[70%]'>
+            <div className='flex flex-col gap-4'>
+              <label>topic</label>
+              <InputField
+                value={topic}
+                onChange={(e) => setTopic(e.currentTarget.value)}
+                placeHolder='what is about your text?'
+              />
+            </div>
 
-          <button className='btn' type='submit'>
-            Generate
-          </button>
-        </form>
+            <div className='flex flex-col gap-4'>
+              <label>keywords (separated by comma)</label>
+              <InputField
+                value={keywords}
+                onChange={(e) => setKeywords(e.currentTarget.value)}
+                placeHolder='can you tell me some keywords for this text?'
+              />
+            </div>
+
+            <button
+              disabled={topic.length == 0 || keywords.length == 0}
+              className='btn'
+              type='submit'
+            >
+              Generate
+            </button>
+          </form>
+        </>
       )}
     </div>
   )
