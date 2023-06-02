@@ -1,4 +1,5 @@
 import { Post } from '@/core'
+import ArticleItem from './components/ArticleItem'
 
 type ListArticlesProps = {
   posts: Post[]
@@ -14,14 +15,7 @@ export default function ListArticles({ posts }: ListArticlesProps) {
   return (
     <div className='masonry sm:masonry-sm md:masonry-md lg:masonry-lg xl:masonry-xl'>
       {posts.map(({ _id, topic }) => {
-        return (
-          <div
-            key={_id}
-            className={`h-[100px] w-full bg-purple-${getRandomColorGrade()} mb-5 break-inside rounded-3xl flex justify-center items-center p-5 text-lg`}
-          >
-            {topic}
-          </div>
-        )
+        return <ArticleItem key={_id} id={_id} colorGrade={getRandomColorGrade()} label={topic} />
       })}
     </div>
   )

@@ -9,26 +9,18 @@ import { AppProps, Post } from '@/core/models'
 import { getAppProps } from '@/core/utils'
 import clientPromise from '../../../lib/mongodb'
 
-type PostDetailProps = Post & NextPageWithLayout
-
-const PostDetail = ({title, postContent}: PostDetailProps) => {
+const PostDetail = ({ postContent }: Post) => {
 
   return (
-    <div className='p-4 overflow-auto h-full'>
-      <div className='max-w-screen-sm mx-auto'>
-        <div className='text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm'>
-          Blog Post
-        </div>
-
-        <div dangerouslySetInnerHTML={{ __html: postContent }} />
+    <div className='px-8 py-3 overflow-auto h-full'>
+      <div className='max-w-screen-md mx-auto'>
+        <div className='[&>p:first-child]:text-muted mt-10' dangerouslySetInnerHTML={{ __html: postContent }} />
       </div>
     </div>
   )
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  // access logged user and get ID
-
   async getServerSideProps(context) {
     const appProps = await getAppProps(context)
 
