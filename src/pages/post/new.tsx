@@ -1,10 +1,8 @@
-import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { ReactElement } from 'react'
 
 import AppLayout from '@/components/layout/AppLayout'
 import { useGeneratePost } from '@/core/hooks'
 import { AppProps } from '@/core/models'
-import { getAppProps } from '@/core/utils'
 
 const NewPostPage = () => {
   const { handleGeneratePost, keywords, topic, setKeywords, setTopic, isGenerating } =
@@ -14,7 +12,9 @@ const NewPostPage = () => {
     <div className='p-5'>
       {isGenerating && (
         <>
-          <div className='mx-auto flex h-full animate-pulse text-green-500 flex-col justify-center items-center'>generating...</div>
+          <div className='mx-auto flex h-full animate-pulse text-green-500 flex-col justify-center items-center'>
+            generating...
+          </div>
         </>
       )}
 
@@ -52,12 +52,5 @@ const NewPostPage = () => {
 NewPostPage.getLayout = function getLayout(page: ReactElement, pageProps: AppProps) {
   return <AppLayout {...pageProps}>{page}</AppLayout>
 }
-
-export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps(context) {
-    const props = await getAppProps(context)
-    return { props }
-  }
-})
 
 export default NewPostPage
