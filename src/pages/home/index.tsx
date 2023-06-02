@@ -4,17 +4,16 @@ import { AppProps } from '@/core/models'
 import { getAppProps } from '@/core/utils'
 import { ReactElement, useEffect } from 'react'
 
-import IconButton from '@/components/atoms/IconButton'
-import AppLayout from '@/components/layout/AppLayout'
-
-import useSearchPost from '@/core/hooks/use_search_post'
-import ListArticles from '@/features/list-articles'
-import PurchaseCreditsView from '@/features/purchase-credits/views'
+import { ToastProps, handleShowToastNotification } from '@/core/ui'
 import { Search } from 'react-feather'
 
+import IconButton from '@/components/atoms/IconButton'
 import InputField from '@/components/atoms/InputField'
 import ToastComponent from '@/components/atoms/ToastComponent'
-import { ToastProps, handleShowToastNotification } from '@/core/ui'
+import AppLayout from '@/components/layout/AppLayout'
+import useSearchPost from '@/core/hooks/use_search_post'
+import ListArticles from '@/features/list-articles'
+import PurchaseCreditsView from '@/features/purchase-credits'
 
 type HomeProps = {
   hasPaymentWithSuccess: boolean
@@ -37,8 +36,8 @@ const Home = ({ posts: postFromSSR, availableTokens, hasPaymentWithSuccess }: Ho
 
   return (
     <>
-      <div className='container mx-auto grid grid-rows-[300px_1fr] h-screen w-screen px-8 md:px-0'>
-        <div className='flex flex-col items-center justify-end mb-10'>
+      <div className='container mx-auto grid grid-rows-[200px_1fr] h-screen w-screen px-8 pb-4'>
+        <div className='flex flex-col items-center my-8'>
           <strong className='text-center text-lg'>make something great</strong>
 
           <div className='w-full'>
@@ -51,7 +50,7 @@ const Home = ({ posts: postFromSSR, availableTokens, hasPaymentWithSuccess }: Ho
           </div>
         </div>
 
-        <div className='container mx-auto mt-10'>
+        <div className='container mx-auto mt-5'>
           {filteredPosts.length === 0 && (
             <>
               <div className='flex flex-col justify-center items-center text-muted'>

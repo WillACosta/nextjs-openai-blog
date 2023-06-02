@@ -15,7 +15,7 @@ const NewPostPage = () => {
 
       {!isGenerating && (
         <>
-          <p className='text-lg text-md max-w-xs md:max-w-none'>
+          <p className='text-lg text-md w-[70%]'>
             generate your blog post here, with power of generating AI.
           </p>
 

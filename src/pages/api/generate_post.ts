@@ -28,8 +28,8 @@ const defaultMessages = (topic: string, keywords: string): ChatCompletionRequest
     {
       role: 'user',
       content: `Write a long and detailed SEO-friendly blog post about ${topic}, that targets the following comma-separated keywords: ${keywords}.
-  The response should be formatted in SEO-friendly HTML,
-  limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`
+      The response should be formatted in SEO-friendly HTML,
+      limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`
     }
   ]
 }
@@ -37,11 +37,9 @@ const defaultMessages = (topic: string, keywords: string): ChatCompletionRequest
 export default withApiAuthRequired(
   async function generatePost(req: NextApiRequest, res: NextApiResponse<Data>) {
 
-    // TODO: move the get user to another place -> domain
     const session = await getSession(req, res)
     const userId = session?.user['sub']
 
-    // TODO: refactor and move logic for DB to data layer
     const mongoDBClient = await clientPromise
     const db = mongoDBClient.db('BlogStandard')
     const userProfile = await db.collection<{ availableTokens: number }>('users').findOne({
@@ -49,7 +47,7 @@ export default withApiAuthRequired(
     })
 
     if (!userProfile?.availableTokens) {
-      return res.status(403)
+      return res.status(403).end('you not have sufficient credits for handle it')
     }
 
     const openAIClient = new OpenAIApi(

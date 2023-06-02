@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { useRouter } from 'next/router'
 import { SyntheticEvent, useState } from 'react'
+import { ToastProps, handleShowToastNotification } from '../ui'
 
 export function useGeneratePost() {
   const router = useRouter()
@@ -13,19 +14,27 @@ export function useGeneratePost() {
     event.preventDefault()
     setIsGenerating(true)
 
-    const response = await fetch('/api/generate_post', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ topic, keywords })
-    })
+    try {
+      const response = await fetch('/api/generate_post', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ topic, keywords })
+      })
 
-    const json = await response.json() as {postId: ObjectId}
+      const json = await response.json() as {postId: ObjectId}
 
-    if (json?.postId) {
+      if (json?.postId) {
+        setIsGenerating(false)
+        router.push(`/post/${json.postId}`)
+      }
+    } catch (error) {
       setIsGenerating(false)
-      router.push(`/post/${json.postId}`)
+      handleShowToastNotification({
+        type: 'error',
+        message: 'you not have sufficient credits for generating a blog post'
+      } as ToastProps)
     }
   }
 
