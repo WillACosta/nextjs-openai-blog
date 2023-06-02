@@ -1,24 +1,38 @@
 ### @nextjs-openai-blog
 
-<!-- <h1 align="center">
-  <img align="center" width ='80px' src="./app/assets/images/logo.png" alt="logo">
-</h1> -->
-
-This project is a showcase for consuming OpenAI APIs and use of generative AI (GPT-3.5) to create articles for
-given topic and keywords, also we've features such as `Auth0` integration and `stripe` for handling in app-purchasing.
-
-_this project is under construction_
+This project is a showcase for consuming OpenAI APIs and use of generative AI (GPT-3.5) to generate blog posts for a given topic and keywords, also we've features such as `Auth0` integration and `stripe` for handling in app-purchasing.
 
 ### Screenshots
 <br/>
-<img src="docs/images/mobile_screenshot.png" width="400"/>
+  <img src="docs/images/mobile_screenshot.png"/>
 <br/>
 
 ### Technical Resources
 
-- Authentication with `Auth0`
+- `Open AI` API integration (GPT-3.5-turbo)
 - Usage of `Next.js` framework
-- Integration with `OpenAI` API using `GPT-3.5-turbo` to generate blog posts
-- Integration with `Stripe` Checkout to buy digital currency
-- `MongoDB` to save user data
+- Integration with `MongoDB` to store user blog posts data
+- Authentication with `Auth0`
+- Integration with `Stripe Payment` for buying digital currency
 - `TailwindCSS` and `RadixUI` for create beautifully, responsive and accessible UI
+
+### How to execute
+
+1. Clone this repository
+```shell
+git clone https://github.com/WillACosta/nextjs-openai-blog
+```
+
+2. Run the following command
+
+```shell
+yarn install & yarn bootstrap
+```
+
+This command will instal the necessary dependencies and runs the script for
+listening to and handling stripe response (webhook)
+
+#
+
+_Feel free for help me to improve and implement new features for this application and so on.
+At least, thanks for being here._
