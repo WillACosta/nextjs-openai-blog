@@ -37,11 +37,11 @@ const Home = ({ posts: postFromSSR, availableTokens, hasPaymentWithSuccess }: Ho
 
   return (
     <>
-      <div className='grid grid-rows-[300px_1fr] h-screen w-screen px-5 md:p-12'>
+      <div className='container mx-auto grid grid-rows-[300px_1fr] h-screen w-screen px-8 md:px-0'>
         <div className='flex flex-col items-center justify-end mb-10'>
           <strong className='text-center text-lg'>make something great</strong>
 
-          <div>
+          <div className='w-full'>
             <form className='flex gap-3 mt-5'>
               <InputField onChange={handleSearchArticle} placeHolder='search your articles here'  />
               <IconButton onClick={(e) => setQueryText(e.currentTarget.value)} icon={<Search />} className='w-[auto]' />
