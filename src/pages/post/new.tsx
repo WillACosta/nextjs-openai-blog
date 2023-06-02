@@ -15,7 +15,9 @@ const NewPostPage = () => {
 
       {!isGenerating && (
         <>
-          <p className='text-lg'>generate your blog post here, with power of generating AI.</p>
+          <p className='text-lg text-md max-w-xs md:max-w-none'>
+            generate your blog post here, with power of generating AI.
+          </p>
 
           <form onSubmit={handleGeneratePost} className='flex flex-col gap-8 w-[70%]'>
             <div className='flex flex-col gap-4'>
