@@ -23,7 +23,12 @@ This project is a showcase for consuming OpenAI APIs and use of generative AI (G
 git clone https://github.com/WillACosta/nextjs-openai-blog
 ```
 
-2. Run the following command
+2. Make sure that you have all environment variables set, before running project, run the following command to copy the env file, and then fill with your own credentials
+```shell
+cp .env-example .env
+```
+
+3. Run the following command
 
 ```shell
 yarn install & yarn bootstrap
